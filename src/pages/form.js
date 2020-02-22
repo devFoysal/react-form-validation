@@ -49,6 +49,7 @@ class UserForm extends Component {
   };
   handelChange = e => {
     const { name, value } = e.target;
+
     let formErrors = this.state.formErrors;
     switch (name) {
       case "fname":
@@ -78,7 +79,7 @@ class UserForm extends Component {
     this.setState({ formErrors, [name]: value }, () => console.log(this.state));
   };
   render() {
-    const { formErrors } = this.state;
+    const { formErrors, ...rest } = this.state;
     return (
       <div className="container">
         <div className="row">
@@ -145,7 +146,11 @@ class UserForm extends Component {
                 )}
               </Form.Group>
 
-              <Button variant="primary" type="submit">
+              <Button
+                disabled={!formValid(this.state)}
+                variant="primary"
+                type="submit"
+              >
                 Submit
               </Button>
             </Form>
